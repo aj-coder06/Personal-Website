@@ -6,6 +6,19 @@ links.querySelectorAll('a').forEach((a) =>
   a.addEventListener('click', () => links.classList.remove('open'))
 );
 
+// Dark mode toggle (initial theme applied inline in <head> to avoid flash)
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  if (next === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  try { localStorage.setItem('theme', next); } catch (e) {}
+});
+
 // Navbar shadow on scroll
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
